@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.zanzagar.androidtoolbox_empsem.MainActivity">
+
+    <Button
+        android:id="@+id/grelec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pogrej me"
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="393dp" />
+
+    <GridLayout
+        android:layout_width="204dp"
+        android:layout_height="310dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.397">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="102dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/TV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/TV1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView1" />
+
+                <TextView
+                    android:id="@+id/TV2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView2" />
+
+                <TextView
+                    android:id="@+id/TV3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView3" />
+
+                <TextView
+                    android:id="@+id/TV4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView4" />
+
+                <TextView
+                    android:id="@+id/TV5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView5" />
+
+                <TextView
+                    android:id="@+id/TV6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView6" />
+
+                <TextView
+                    android:id="@+id/TV7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView7" />
+
+                <TextView
+                    android:id="@+id/TV8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView8" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="109dp"
+                android:layout_height="match_parent"
+                android:gravity="fill_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/TV_alt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView_alt" />
+
+                <TextView
+                    android:id="@+id/TV1_alt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView1_alt" />
+
+                <TextView
+                    android:id="@+id/TV2_alt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView2_alt" />
+
+                <TextView
+                    android:id="@+id/TV3_alt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView3_alt" />
+
+                <TextView
+                    android:id="@+id/TV4_alt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView4_alt" />
+
+                <TextView
+                    android:id="@+id/TV5_alt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView5_alt" />
+
+                <TextView
+                    android:id="@+id/TV6_alt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView6_alt" />
+
+                <TextView
+                    android:id="@+id/TV7_alt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView7_alt" />
+
+                <TextView
+                    android:id="@+id/TV8_alt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView8_alt" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/shrani"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shrani podatke"
+        tools:layout_editor_absoluteX="120dp"
+        tools:layout_editor_absoluteY="455dp" />
+</android.support.constraint.ConstraintLayout>
