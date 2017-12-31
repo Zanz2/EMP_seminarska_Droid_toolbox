@@ -8,7 +8,7 @@
 
     <GridLayout
         android:layout_width="308dp"
-        android:layout_height="351dp"
+        android:layout_height="321dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
