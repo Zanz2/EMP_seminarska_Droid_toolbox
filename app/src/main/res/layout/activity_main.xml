@@ -9,6 +9,7 @@
     <GridLayout
         android:layout_width="308dp"
         android:layout_height="350dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -31,70 +32,98 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="TextView" />
+                    android:text="Gravity x:" />
 
                 <TextView
                     android:id="@+id/TV1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="TextView1" />
+                    android:text="y:" />
 
                 <TextView
                     android:id="@+id/TV2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="TextView2" />
+                    android:text="z:" />
 
                 <TextView
                     android:id="@+id/TV3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="TextView3" />
+                    android:text="Acceleration x:" />
 
                 <TextView
                     android:id="@+id/TV4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="TextView4" />
+                    android:text="y:" />
 
                 <TextView
                     android:id="@+id/TV5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="TextView5" />
+                    android:text="z:" />
 
                 <TextView
                     android:id="@+id/TV6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="TextView6" />
+                    android:text="Rotation x:" />
 
                 <TextView
                     android:id="@+id/TV7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="TextView7" />
+                    android:text="y:" />
 
                 <TextView
                     android:id="@+id/TV8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="TextView8" />
+                    android:text="z:" />
 
                 <TextView
                     android:id="@+id/TV9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="TextView9" />
+                    android:text="Proximity (cm):" />
+
+                <TextView
+                    android:id="@+id/TV10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="Temp (celzije): " />
+
+                <TextView
+                    android:id="@+id/TV11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="Pressure(hpa)" />
+
+                <TextView
+                    android:id="@+id/TV12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="Light (lux)" />
+
+                <TextView
+                    android:id="@+id/TV13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="Humidity (relative)" />
 
             </LinearLayout>
 
@@ -173,6 +202,34 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:text="TextView9_alt" />
+
+                <TextView
+                    android:id="@+id/TV10_alt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/TV11_alt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/TV12_alt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/TV13_alt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="TextView" />
 
             </LinearLayout>
         </LinearLayout>

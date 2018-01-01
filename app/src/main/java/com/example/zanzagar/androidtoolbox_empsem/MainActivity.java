@@ -44,6 +44,11 @@ public class MainActivity extends Activity {
     private Sensor rot_vect_sens;
     private Sensor prox_sens;
 
+    private Sensor temp_sens;
+    private Sensor pressure_sens;
+    private Sensor light_sens;
+    private Sensor humid_sens;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +70,11 @@ public class MainActivity extends Activity {
         lin_accel_sens = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         rot_vect_sens = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
         prox_sens = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+
+        temp_sens = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+        pressure_sens = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
+        light_sens = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        humid_sens = mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
         if(grav_sens == null){
             ((TextView)findViewById(R.id.TV_alt)).setText("Gravity sensor not found.");
             ((TextView)findViewById(R.id.TV1_alt)).setText("Gravity sensor not found.");
@@ -96,6 +106,26 @@ public class MainActivity extends Activity {
             ((TextView)findViewById(R.id.TV9_alt)).setText("Proximity sensor not found.");
         }else{
             ((TextView)findViewById(R.id.TV9_alt)).setText("Proximity sensor exists!");
+        }
+        if(temp_sens == null){
+            ((TextView)findViewById(R.id.TV10_alt)).setText("Temperature sensor not found.");
+        }else{
+            ((TextView)findViewById(R.id.TV10_alt)).setText("Temperature sensor exists!");
+        }
+        if(pressure_sens == null){
+            ((TextView)findViewById(R.id.TV11_alt)).setText("Pressure sensor not found.");
+        }else{
+            ((TextView)findViewById(R.id.TV11_alt)).setText("Pressure sensor exists!");
+        }
+        if(light_sens == null){
+            ((TextView)findViewById(R.id.TV12_alt)).setText("Light sensor not found.");
+        }else{
+            ((TextView)findViewById(R.id.TV12_alt)).setText("Light sensor exists!");
+        }
+        if(humid_sens == null){
+            ((TextView)findViewById(R.id.TV13_alt)).setText("Humidity sensor not found.");
+        }else{
+            ((TextView)findViewById(R.id.TV13_alt)).setText("Humidity sensor exists!");
         }
 
         btnGrelec.setOnClickListener(new View.OnClickListener() {
@@ -154,6 +184,26 @@ public class MainActivity extends Activity {
                 String prox_sens_info = " distance (usually in cm): ";
                 prox_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV9_alt)).getText());
                 db.insertLog(prox_sens_name,prox_sens_info,s_currenttime);
+
+                String temp_sens_name = "Temperature Sensor";
+                String temp_sens_info = " value (in celsius): ";
+                temp_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV10_alt)).getText());
+                db.insertLog(temp_sens_name,temp_sens_info,s_currenttime);
+
+                String press_sens_name = "Pressure Sensor";
+                String press_sens_info = " value (in hpa): ";
+                press_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV11_alt)).getText());
+                db.insertLog(press_sens_name,press_sens_info,s_currenttime);
+
+                String light_sens_name = "Light Sensor";
+                String light_sens_info = " value (in lux SI): ";
+                light_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV12_alt)).getText());
+                db.insertLog(light_sens_name,light_sens_info,s_currenttime);
+
+                String humid_sens_name = "Humidity sensor";
+                String humid_sens_info = " value (relative): ";
+                humid_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV13_alt)).getText());
+                db.insertLog(humid_sens_name,humid_sens_info,s_currenttime);
             }
         });
         btnPodatkiLog.setOnClickListener(new View.OnClickListener() {
@@ -179,7 +229,9 @@ public class MainActivity extends Activity {
     SensorEventListener gravitySensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-
+            ((TextView)findViewById(R.id.TV_alt)).setText(String.valueOf(sensorEvent.values[0]));
+            ((TextView)findViewById(R.id.TV1_alt)).setText(String.valueOf(sensorEvent.values[1]));
+            ((TextView)findViewById(R.id.TV2_alt)).setText(String.valueOf(sensorEvent.values[2]));
         }
 
         @Override
@@ -190,6 +242,9 @@ public class MainActivity extends Activity {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
             // More code goes here
+            ((TextView)findViewById(R.id.TV3_alt)).setText(String.valueOf(sensorEvent.values[0]));
+            ((TextView)findViewById(R.id.TV4_alt)).setText(String.valueOf(sensorEvent.values[1]));
+            ((TextView)findViewById(R.id.TV5_alt)).setText(String.valueOf(sensorEvent.values[2]));
         }
 
         @Override
@@ -224,6 +279,51 @@ public class MainActivity extends Activity {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
             // More code goes here
+            ((TextView)findViewById(R.id.TV9_alt)).setText(String.valueOf(sensorEvent.values[0]));
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+        }
+    };
+    SensorEventListener temperatureSensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            // More code goes here
+            ((TextView)findViewById(R.id.TV10_alt)).setText(String.valueOf(sensorEvent.values[0]));
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+        }
+    };
+    SensorEventListener pressureSensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            // More code goes here
+            ((TextView)findViewById(R.id.TV11_alt)).setText(String.valueOf(sensorEvent.values[0]));
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+        }
+    };
+    SensorEventListener lightSensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            // More code goes here
+            ((TextView)findViewById(R.id.TV12_alt)).setText(String.valueOf(sensorEvent.values[0]));
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+        }
+    };
+    SensorEventListener humidSensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            // More code goes here
+            ((TextView)findViewById(R.id.TV13_alt)).setText(String.valueOf(sensorEvent.values[0]));
         }
 
         @Override
@@ -237,7 +337,10 @@ public class MainActivity extends Activity {
         mSensorManager.registerListener(accelerationSensorListener, lin_accel_sens, SensorManager.SENSOR_DELAY_UI);
         mSensorManager.registerListener(rotationSensorListener, rot_vect_sens, SensorManager.SENSOR_DELAY_UI);
         mSensorManager.registerListener(proximitySensorListener, prox_sens, SensorManager.SENSOR_DELAY_UI);
-
+        mSensorManager.registerListener(temperatureSensorListener, temp_sens, SensorManager.SENSOR_DELAY_UI);
+        mSensorManager.registerListener(pressureSensorListener, pressure_sens, SensorManager.SENSOR_DELAY_UI);
+        mSensorManager.registerListener(lightSensorListener, light_sens, SensorManager.SENSOR_DELAY_UI);
+        mSensorManager.registerListener(humidSensorListener, humid_sens, SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
@@ -247,6 +350,10 @@ public class MainActivity extends Activity {
         mSensorManager.unregisterListener(accelerationSensorListener);
         mSensorManager.unregisterListener(rotationSensorListener);
         mSensorManager.unregisterListener(proximitySensorListener);
+        mSensorManager.unregisterListener(temperatureSensorListener);
+        mSensorManager.unregisterListener(pressureSensorListener);
+        mSensorManager.unregisterListener(lightSensorListener);
+        mSensorManager.unregisterListener(humidSensorListener);
     }
     public void computeSHAHash(String password)
     {
