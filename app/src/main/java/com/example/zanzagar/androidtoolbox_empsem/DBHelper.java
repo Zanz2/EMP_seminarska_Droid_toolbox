@@ -78,6 +78,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 "id = ? ",
                 new String[] { Integer.toString(id) });
     }
+    public boolean deleteLogs () {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+ LOGS_TABLE_NAME);
+        return true;
+    }
 
     public ArrayList<String> getAllLogs() {
         ArrayList<String> array_list = new ArrayList<String>();
@@ -88,7 +93,7 @@ public class DBHelper extends SQLiteOpenHelper {
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(LOGS_COLUMN_NAME)));
+            array_list.add(res.getString(res.getColumnIndex(LOGS_COLUMN_NAME))+"\n"+res.getString(res.getColumnIndex(LOGS_COLUMN_INFO))+"\n"+res.getString(res.getColumnIndex(LOGS_COLUMN_TIMESTAMP)));
             res.moveToNext();
         }
         return array_list;

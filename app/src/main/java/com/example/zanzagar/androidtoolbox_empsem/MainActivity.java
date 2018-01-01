@@ -2,6 +2,7 @@ package com.example.zanzagar.androidtoolbox_empsem;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -153,7 +154,17 @@ public class MainActivity extends Activity {
                 db.insertLog(prox_sens_name,prox_sens_info,s_currenttime);
             }
         });
+        btnPodatkiLog.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(MainActivity.this, LogDisplay.class);
+                myIntent.putExtra("list", db.getAllLogs()); //za pošiljanje drugam
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
     }
+
     SensorEventListener gravitySensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
