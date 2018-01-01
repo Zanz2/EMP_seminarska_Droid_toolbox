@@ -43,6 +43,7 @@ public class LogDisplay extends Activity {
                 Intent myIntent = new Intent(LogDisplay.this, MainActivity.class);
                 //myIntent.putExtra("key", value); //za pošiljanje drugam
                 LogDisplay.this.startActivity(myIntent);
+
             }
         });
     }
@@ -53,5 +54,6 @@ public class LogDisplay extends Activity {
                 input );
 
         ListPrikaz.setAdapter(arrayAdapter);
+
     }
 }

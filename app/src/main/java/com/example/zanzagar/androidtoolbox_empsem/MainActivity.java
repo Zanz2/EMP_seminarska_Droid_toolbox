@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
     private Button btnGrelec;
     private Button btnShrani;
     private Button btnPodatkiLog;
+    private Button btnDrugaOrodja;
     private Sensor grav_sens;
     private Sensor lin_accel_sens;
     private Sensor rot_vect_sens;
@@ -59,6 +60,7 @@ public class MainActivity extends Activity {
         btnGrelec = (Button)findViewById(R.id.grelec);
         btnShrani = (Button)findViewById(R.id.shrani);
         btnPodatkiLog = (Button)findViewById(R.id.podatki_log);
+        btnDrugaOrodja = (Button)findViewById(R.id.orodja);
         grav_sens = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
         lin_accel_sens = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         rot_vect_sens = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
@@ -161,6 +163,15 @@ public class MainActivity extends Activity {
                 Intent myIntent = new Intent(MainActivity.this, LogDisplay.class);
                 myIntent.putExtra("list", db.getAllLogs()); //za pošiljanje drugam
                 MainActivity.this.startActivity(myIntent);
+            }
+        });
+        btnDrugaOrodja.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent myIntent1 = new Intent(MainActivity.this, Tools.class);
+                //myIntent.putExtra("list", db.getAllLogs()); //za pošiljanje drugam
+                MainActivity.this.startActivity(myIntent1);
             }
         });
     }
