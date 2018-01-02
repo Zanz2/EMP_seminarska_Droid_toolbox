@@ -28,7 +28,7 @@ import java.util.List;
 
 import static java.lang.Thread.sleep;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements Gretje.OnProgressListener {
     private SensorManager mSensorManager;
     private TriggerEventListener mTriggerEventListener;
     private String HashValue;
@@ -48,6 +48,8 @@ public class MainActivity extends Activity {
     private Sensor pressure_sens;
     private Sensor light_sens;
     private Sensor humid_sens;
+
+    private Gretje gretje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,18 +129,28 @@ public class MainActivity extends Activity {
         }else{
             ((TextView)findViewById(R.id.TV13_alt)).setText("Humidity sensor exists!");
         }
-
+        gretje = null;
         btnGrelec.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 if(!warming){
                     // https://stackoverflow.com/questions/7478941/implementing-a-while-loop-in-android
-                    for(int i=0;i<100000;i++) {
-                        computeSHAHash(TopleBesede);
-                    }
+                    //for(int i=0;i<100000;i++) {
+                    //    computeSHAHash(TopleBesede);
+                    //}
                     Toast.makeText(MainActivity.this,
-                            "To heat the phone more press it again", Toast.LENGTH_LONG).show();
+                            "Heating", Toast.LENGTH_LONG).show();
+                    gretje = new Gretje();
+                    gretje.dejKontekst(MainActivity.this);
+                    gretje.setOnProgressListener(MainActivity.this);
+                    gretje.heat();
+                }else{
+                    //Toast.makeText(MainActivity.this,
+                    //        "Stopped heating.", Toast.LENGTH_LONG).show();
+                    if (gretje != null)
+                        gretje.stop();
+                        gretje = null;
                 }
                 warming=!warming;
             }
@@ -379,6 +391,16 @@ public class MainActivity extends Activity {
 
         sb.append(hex);
         HashValue=sb.toString();
+
+    }
+
+    @Override
+    public void onStarted() {
+
+    }
+
+    @Override
+    public void onStopped(boolean finished) {
 
     }
     /*

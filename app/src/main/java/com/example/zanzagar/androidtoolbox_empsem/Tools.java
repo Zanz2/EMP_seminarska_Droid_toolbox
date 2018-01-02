@@ -1,18 +1,38 @@
 package com.example.zanzagar.androidtoolbox_empsem;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.hardware.TriggerEventListener;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 public class Tools extends Activity {
@@ -26,10 +46,20 @@ public class Tools extends Activity {
     private String HashValue;
     private Button btnBack2;
 
+    Button btnGetdata;
+    RequestQueue requestQueue;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tools);
+
+
+        btnGetdata = (Button) findViewById(R.id.get_data);
+        requestQueue = Volley.newRequestQueue(this);
+
         mSensorManager = (SensorManager)this.getSystemService(Context.SENSOR_SERVICE);
         List<Sensor> deviceSensors = mSensorManager.getSensorList(Sensor.TYPE_ALL);
         grav_sens = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
@@ -47,7 +77,18 @@ public class Tools extends Activity {
 
             }
         });
+        btnGetdata.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                boolean neki= getJSON(0);
+                neki = getJSON(1);
+
+
+            }
+        });
     }
+
 
     SensorEventListener gravitySensorListener = new SensorEventListener() {
         @Override
@@ -146,4 +187,55 @@ public class Tools extends Activity {
         mSensorManager.unregisterListener(rotationSensorListener);
 
     }
+    public boolean getJSON(int i){
+        try {
+            String baseUrl="ne";
+            if(i==0) {
+                baseUrl = "https://api.coinmarketcap.com/v1/ticker/bitcoin/";
+            }else if(i==1) {
+                baseUrl = "https://api.coinmarketcap.com/v1/ticker/ethereum/";
+            }
+
+            URL url = new URL(baseUrl);
+            HttpURLConnection connection =
+                    (HttpURLConnection)url.openConnection();
+
+
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()));
+
+            StringBuffer json = new StringBuffer(1024);
+            String tmp="";
+            while((tmp=reader.readLine())!=null)
+                json.append(tmp).append("\n");
+            reader.close();
+
+
+
+            JSONArray mJsonArray = new JSONArray(json.toString());
+            JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+
+            String chg = mJsonObject.getString("percent_change_24h");
+            String usd = mJsonObject.getString("price_usd");
+            String out="Price: "+usd+" Change in 24hrs: "+chg;
+            if(i==0){
+                ((TextView) findViewById(R.id.btc)).setText(out);
+            }else if(i==1){
+                ((TextView) findViewById(R.id.btc)).setText(out);
+            }
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+    public void setTextoutput(String text){
+        ((TextView) findViewById(R.id.btc)).setText(text);
+        ((TextView) findViewById(R.id.eth)).setText(text);
+    }
+
+
+
+
+
 }
+
