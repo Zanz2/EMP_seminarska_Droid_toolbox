@@ -9,6 +9,7 @@
     <GridLayout
         android:layout_width="308dp"
         android:layout_height="350dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +103,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="Temp (celzije): " />
+                    android:text="Temp (c): " />
 
                 <TextView
                     android:id="@+id/TV11"
@@ -254,13 +255,11 @@
                 android:id="@+id/orodja"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/grelec"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="13dp"
-                android:layout_marginEnd="55dp"
-                android:layout_marginRight="55dp"
-                android:layout_toLeftOf="@+id/podatki_log"
-                android:layout_toStartOf="@+id/podatki_log"
-                android:text="Druga orodja" />
+                android:layout_alignRight="@+id/grelec"
+                android:layout_marginBottom="18dp"
+                android:text="Other tools" />
 
             <Button
                 android:id="@+id/podatki_log"
@@ -268,19 +267,21 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/orodja"
                 android:layout_alignBottom="@+id/orodja"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:text="Seznam podatkov" />
+                android:layout_alignLeft="@+id/shrani"
+                android:layout_alignStart="@+id/shrani"
+                android:text="Log of data" />
 
             <Button
                 android:id="@+id/shrani"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/podatki_log"
-                android:layout_alignLeft="@+id/podatki_log"
-                android:layout_alignStart="@+id/podatki_log"
-                android:layout_marginBottom="16dp"
-                android:text="Shrani podatke"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="49dp"
+                android:layout_marginStart="49dp"
+                android:layout_toEndOf="@+id/grelec"
+                android:layout_toRightOf="@+id/grelec"
+                android:text="Save data "
                 tools:layout_editor_absoluteX="120dp"
                 tools:layout_editor_absoluteY="393dp" />
 
@@ -290,9 +291,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/shrani"
                 android:layout_alignBottom="@+id/shrani"
-                android:layout_alignEnd="@+id/orodja"
-                android:layout_alignRight="@+id/orodja"
-                android:text="Pogrej me"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="34dp"
+                android:layout_marginStart="34dp"
+                android:text="Heat me up"
                 tools:layout_editor_absoluteX="140dp"
                 tools:layout_editor_absoluteY="455dp" />
         </RelativeLayout>
