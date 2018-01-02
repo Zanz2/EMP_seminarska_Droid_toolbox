@@ -84,7 +84,11 @@ public class Tools extends Activity {
             for(int i = 0; i < 3; i++) {
                 orientations[i] = (float)(Math.toDegrees(orientations[i]));
             }
-            bubble_level_refresh(orientations[2]);
+            try {
+                bubble_level_refresh(orientations[2]);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             /*
             ((TextView)findViewById(R.id.TV6_alt)).setText(String.valueOf(orientations[0]));
             ((TextView)findViewById(R.id.TV7_alt)).setText(String.valueOf(orientations[1]));
@@ -96,15 +100,40 @@ public class Tools extends Activity {
         public void onAccuracyChanged(Sensor sensor, int i) {
         }
     };
-    void bubble_level_refresh(float z){
+    void bubble_level_refresh(float z) throws InterruptedException {
+
+        double change = 2.571428571;
+        //String output="----------------------------------------------------------------------";
+        StringBuilder output = new StringBuilder("----------------------------------------------------------------------");
+
+        double value = (double)z/change;
+        int res=0;
+        int stevec=0;
+
+        for(int i=-35;i<=35;i++){
+            if(i<=(int)value&&value<(i+1)){
+                res=i;
+                break;
+            }
+            stevec=stevec+1;
+
+        }
+        res=res+35;
+        if(value>35||value<-35)
+        {
+
+        }else {
+            output.setCharAt(res, '+');
+            ((TextView) findViewById(R.id.rot_val)).setText(String.valueOf(output));
+        }
 
     }
     @Override
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(gravitySensorListener, grav_sens, SensorManager.SENSOR_DELAY_UI);
-        mSensorManager.registerListener(accelerationSensorListener, lin_accel_sens, SensorManager.SENSOR_DELAY_UI);
-        mSensorManager.registerListener(rotationSensorListener, rot_vect_sens, SensorManager.SENSOR_DELAY_UI);
+        mSensorManager.registerListener(gravitySensorListener, grav_sens, 200000);
+        mSensorManager.registerListener(accelerationSensorListener, lin_accel_sens,200000 );
+        mSensorManager.registerListener(rotationSensorListener, rot_vect_sens, 200000);
 
 
     }

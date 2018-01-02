@@ -138,7 +138,7 @@ public class MainActivity extends Activity {
                         computeSHAHash(TopleBesede);
                     }
                     Toast.makeText(MainActivity.this,
-                            "Pogrelo", Toast.LENGTH_LONG).show();
+                            "To heat the phone more press it again", Toast.LENGTH_LONG).show();
                 }
                 warming=!warming;
             }
@@ -333,9 +333,9 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(gravitySensorListener, grav_sens, SensorManager.SENSOR_DELAY_UI);
-        mSensorManager.registerListener(accelerationSensorListener, lin_accel_sens, SensorManager.SENSOR_DELAY_UI);
-        mSensorManager.registerListener(rotationSensorListener, rot_vect_sens, SensorManager.SENSOR_DELAY_UI);
+        mSensorManager.registerListener(gravitySensorListener, grav_sens, 200000);
+        mSensorManager.registerListener(accelerationSensorListener, lin_accel_sens, 200000);
+        mSensorManager.registerListener(rotationSensorListener, rot_vect_sens, 200000);
         mSensorManager.registerListener(proximitySensorListener, prox_sens, SensorManager.SENSOR_DELAY_UI);
         mSensorManager.registerListener(temperatureSensorListener, temp_sens, SensorManager.SENSOR_DELAY_UI);
         mSensorManager.registerListener(pressureSensorListener, pressure_sens, SensorManager.SENSOR_DELAY_UI);
