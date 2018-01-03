@@ -22,7 +22,7 @@ public class Gretje extends AsyncTask<Object, Double, Boolean> {
     }
 
     private OnProgressListener onProgressListener = null;
-    private boolean keepRunning = false;
+    private boolean keepRunning=true;
     private String HashValue;
     private Context kontekst;
     private String TopleBesede="Veseli prazniki in srecno novo leto, naj vas greje ta string. Bla bla kolo pisalo sir zelenjava neki bla";
@@ -44,7 +44,8 @@ public class Gretje extends AsyncTask<Object, Double, Boolean> {
 
     @Override
     protected Boolean doInBackground(Object... params) {
-        return heat();
+        boolean neki=  heat();
+        return neki;
     }
 
     @Override
@@ -70,8 +71,7 @@ public class Gretje extends AsyncTask<Object, Double, Boolean> {
                 break;
             }
         }while(true);
-        Toast.makeText(kontekst,
-                "Stopped heating.", Toast.LENGTH_LONG).show();
+
         return true;
     }
 

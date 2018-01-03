@@ -36,6 +36,7 @@ public class MainActivity extends Activity implements Gretje.OnProgressListener 
     private String TopleBesede="Veseli prazniki in srecno novo leto, naj vas greje ta string. Bla bla kolo pisalo sir zelenjava neki bla";
 
     private Button btnGrelec;
+    private Button btnStop;
     private Button btnShrani;
     private Button btnPodatkiLog;
     private Button btnDrugaOrodja;
@@ -65,7 +66,10 @@ public class MainActivity extends Activity implements Gretje.OnProgressListener 
         //}
 
         btnGrelec = (Button)findViewById(R.id.grelec);
+        btnStop = (Button)findViewById(R.id.stop);
         btnShrani = (Button)findViewById(R.id.shrani);
+        btnStop.setClickable(false);
+
         btnPodatkiLog = (Button)findViewById(R.id.podatki_log);
         btnDrugaOrodja = (Button)findViewById(R.id.orodja);
         grav_sens = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
@@ -129,30 +133,45 @@ public class MainActivity extends Activity implements Gretje.OnProgressListener 
         }else{
             ((TextView)findViewById(R.id.TV13_alt)).setText("Humidity sensor exists!");
         }
-        gretje = null;
+
         btnGrelec.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 if(!warming){
+                    warming=true;
                     // https://stackoverflow.com/questions/7478941/implementing-a-while-loop-in-android
                     //for(int i=0;i<100000;i++) {
                     //    computeSHAHash(TopleBesede);
                     //}
+                    btnGrelec.setClickable(false);
+                    btnStop.setClickable(true);
                     Toast.makeText(MainActivity.this,
                             "Heating", Toast.LENGTH_LONG).show();
                     gretje = new Gretje();
                     gretje.dejKontekst(MainActivity.this);
                     gretje.setOnProgressListener(MainActivity.this);
-                    gretje.heat();
-                }else{
+                    gretje.execute();
+                }
+            }
+        });
+        btnStop.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if(warming){
                     //Toast.makeText(MainActivity.this,
                     //        "Stopped heating.", Toast.LENGTH_LONG).show();
+                    warming=false;
+                    btnGrelec.setClickable(true);
+                    btnStop.setClickable(false);
                     if (gretje != null)
                         gretje.stop();
-                        gretje = null;
+                    gretje = null;
+                    Toast.makeText(MainActivity.this,
+                            "Stopped heating.", Toast.LENGTH_LONG).show();
                 }
-                warming=!warming;
+
             }
         });
         btnShrani.setOnClickListener(new View.OnClickListener() {

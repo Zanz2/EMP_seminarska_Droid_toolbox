@@ -255,10 +255,9 @@
                 android:id="@+id/orodja"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/grelec"
                 android:layout_alignParentBottom="true"
-                android:layout_alignRight="@+id/grelec"
-                android:layout_marginBottom="18dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="13dp"
                 android:text="Spirit level" />
 
             <Button
@@ -276,11 +275,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/podatki_log"
-                android:layout_marginBottom="15dp"
-                android:layout_marginLeft="49dp"
-                android:layout_marginStart="49dp"
-                android:layout_toEndOf="@+id/grelec"
-                android:layout_toRightOf="@+id/grelec"
+                android:layout_toEndOf="@+id/orodja"
+                android:layout_toRightOf="@+id/orodja"
                 android:text="Save data "
                 tools:layout_editor_absoluteX="120dp"
                 tools:layout_editor_absoluteY="393dp" />
@@ -289,15 +285,22 @@
                 android:id="@+id/grelec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/shrani"
-                android:layout_alignBottom="@+id/shrani"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="34dp"
-                android:layout_marginStart="34dp"
+                android:layout_above="@+id/stop"
+                android:layout_alignLeft="@+id/stop"
+                android:layout_alignStart="@+id/stop"
                 android:text="Heat me up"
                 tools:layout_editor_absoluteX="140dp"
                 tools:layout_editor_absoluteY="455dp" />
+
+            <Button
+                android:id="@+id/stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/orodja"
+                android:layout_alignBottom="@+id/orodja"
+                android:layout_toLeftOf="@+id/orodja"
+                android:layout_toStartOf="@+id/orodja"
+                android:text="Stop heating" />
         </RelativeLayout>
 
     </GridLayout>
