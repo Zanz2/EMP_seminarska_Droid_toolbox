@@ -17,7 +17,7 @@ import java.security.NoSuchAlgorithmException;
 public class Gretje extends AsyncTask<Object, Double, Boolean> {
     public interface OnProgressListener {
         void onStarted();
-        //void onProgress(double progress);
+
         void onStopped(boolean finished);
     }
 
@@ -88,12 +88,12 @@ public class Gretje extends AsyncTask<Object, Double, Boolean> {
         {
             mdSha1 = MessageDigest.getInstance("SHA-1");
         } catch (NoSuchAlgorithmException e1) {
-            Log.e("Benchmark", "Error initializing SHA1");
+            Log.e("Benchmark", "Error initializing heating");
         }
         try {
             mdSha1.update(password.getBytes("ASCII"));
         } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
         byte[] data = mdSha1.digest();

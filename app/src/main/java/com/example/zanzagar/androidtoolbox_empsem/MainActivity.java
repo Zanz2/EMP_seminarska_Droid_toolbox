@@ -253,7 +253,7 @@ public class MainActivity extends Activity implements Gretje.OnProgressListener 
     SensorEventListener accelerationSensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            // More code goes here
+
             ((TextView)findViewById(R.id.TV3_alt)).setText(String.valueOf(sensorEvent.values[0]));
             ((TextView)findViewById(R.id.TV4_alt)).setText(String.valueOf(sensorEvent.values[1]));
             ((TextView)findViewById(R.id.TV5_alt)).setText(String.valueOf(sensorEvent.values[2]));
@@ -290,7 +290,7 @@ public class MainActivity extends Activity implements Gretje.OnProgressListener 
     SensorEventListener proximitySensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            // More code goes here
+
             ((TextView)findViewById(R.id.TV9_alt)).setText(String.valueOf(sensorEvent.values[0]));
         }
 
@@ -301,7 +301,7 @@ public class MainActivity extends Activity implements Gretje.OnProgressListener 
     SensorEventListener temperatureSensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            // More code goes here
+
             ((TextView)findViewById(R.id.TV10_alt)).setText(String.valueOf(sensorEvent.values[0]));
         }
 
@@ -312,7 +312,7 @@ public class MainActivity extends Activity implements Gretje.OnProgressListener 
     SensorEventListener pressureSensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            // More code goes here
+
             ((TextView)findViewById(R.id.TV11_alt)).setText(String.valueOf(sensorEvent.values[0]));
         }
 
@@ -323,7 +323,7 @@ public class MainActivity extends Activity implements Gretje.OnProgressListener 
     SensorEventListener lightSensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            // More code goes here
+
             ((TextView)findViewById(R.id.TV12_alt)).setText(String.valueOf(sensorEvent.values[0]));
         }
 
@@ -334,7 +334,7 @@ public class MainActivity extends Activity implements Gretje.OnProgressListener 
     SensorEventListener humidSensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            // More code goes here
+
             ((TextView)findViewById(R.id.TV13_alt)).setText(String.valueOf(sensorEvent.values[0]));
         }
 
