@@ -51,9 +51,9 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rot_val"
+            android:layout_above="@+id/btc"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="43dp"
+            android:layout_marginBottom="14dp"
             android:text="Bitcoin price (REST api)" />
 
         <TextView

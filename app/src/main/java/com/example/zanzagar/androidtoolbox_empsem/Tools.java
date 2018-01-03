@@ -81,8 +81,7 @@ public class Tools extends Activity {
 
             @Override
             public void onClick(View view) {
-                boolean neki= getJSON(0);
-                neki = getJSON(1);
+                new GetCoinPrice().execute();
 
 
             }
@@ -187,47 +186,71 @@ public class Tools extends Activity {
         mSensorManager.unregisterListener(rotationSensorListener);
 
     }
-    public boolean getJSON(int i){
-        try {
-            String baseUrl="ne";
-            if(i==0) {
-                baseUrl = "https://api.coinmarketcap.com/v1/ticker/bitcoin/";
-            }else if(i==1) {
-                baseUrl = "https://api.coinmarketcap.com/v1/ticker/ethereum/";
+    private class GetCoinPrice extends AsyncTask<String, Void, String> {
+
+        private String bitcoin;
+        private String ethereum;
+        public GetCoinPrice() {
+
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            if(getJSON(0)&&getJSON(1)){
+                return "true";
+            }else{
+                return "false";
             }
+        }
 
-            URL url = new URL(baseUrl);
-            HttpURLConnection connection =
-                    (HttpURLConnection)url.openConnection();
+        @Override
+        protected void onPostExecute(String temp) {
+            ((TextView) findViewById(R.id.btc)).setText(String.valueOf(bitcoin));
+            ((TextView) findViewById(R.id.eth)).setText(String.valueOf(ethereum));
+        }
+        private boolean getJSON(int i){
+            try {
+                String baseUrl="ne";
+                if(i==0) {
+                    baseUrl = "https://api.coinmarketcap.com/v1/ticker/bitcoin/";
+                }else if(i==1) {
+                    baseUrl = "https://api.coinmarketcap.com/v1/ticker/ethereum/";
+                }
+
+                URL url = new URL(baseUrl);
+                HttpURLConnection connection =
+                        (HttpURLConnection)url.openConnection();
 
 
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream()));
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(connection.getInputStream()));
 
-            StringBuffer json = new StringBuffer(1024);
-            String tmp="";
-            while((tmp=reader.readLine())!=null)
-                json.append(tmp).append("\n");
-            reader.close();
+                StringBuffer json = new StringBuffer(1024);
+                String tmp="";
+                while((tmp=reader.readLine())!=null)
+                    json.append(tmp).append("\n");
+                reader.close();
 
 
 
-            JSONArray mJsonArray = new JSONArray(json.toString());
-            JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+                JSONArray mJsonArray = new JSONArray(json.toString());
+                JSONObject mJsonObject = mJsonArray.getJSONObject(0);
 
-            String chg = mJsonObject.getString("percent_change_24h");
-            String usd = mJsonObject.getString("price_usd");
-            String out="Price: "+usd+" Change in 24hrs: "+chg;
-            if(i==0){
-                ((TextView) findViewById(R.id.btc)).setText(out);
-            }else if(i==1){
-                ((TextView) findViewById(R.id.btc)).setText(out);
+                String chg = mJsonObject.getString("percent_change_24h");
+                String usd = mJsonObject.getString("price_usd");
+                String out="Price(usd): "+usd+" Change in 24hrs(%): "+chg;
+                if(i==0){
+                    this.bitcoin=out;
+                }else if(i==1){
+                    this.ethereum=out;
+                }
+                return true;
+            }catch(Exception e){
+                return false;
             }
-            return true;
-        }catch(Exception e){
-            return false;
         }
     }
+
     public void setTextoutput(String text){
         ((TextView) findViewById(R.id.btc)).setText(text);
         ((TextView) findViewById(R.id.eth)).setText(text);
