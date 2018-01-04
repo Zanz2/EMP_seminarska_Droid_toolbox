@@ -235,6 +235,8 @@ public class MainActivity extends Activity implements Gretje.OnProgressListener 
                 String humid_sens_info = " value (relative): ";
                 humid_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV13_alt)).getText());
                 db.insertLog(humid_sens_name,humid_sens_info,s_currenttime);
+                String break1 = "-----";
+                db.insertLog(break1,break1,break1);
             }
         });
         btnPodatkiLog.setOnClickListener(new View.OnClickListener() {

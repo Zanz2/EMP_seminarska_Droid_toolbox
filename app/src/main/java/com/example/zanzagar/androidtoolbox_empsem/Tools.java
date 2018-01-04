@@ -153,6 +153,8 @@ public class Tools extends Activity {
         for(int i=-35;i<=35;i++){
             if(i<=(int)value&&value<(i+1)){
                 res=i;
+                res= -res;
+
                 break;
             }
             stevec=stevec+1;
@@ -163,8 +165,10 @@ public class Tools extends Activity {
         {
 
         }else {
-            output.setCharAt(res, '+');
-            ((TextView) findViewById(R.id.rot_val)).setText(String.valueOf(output));
+            if(res>=0&&res<70) {
+                output.setCharAt(res, '+');
+                ((TextView) findViewById(R.id.rot_val)).setText(String.valueOf(output));
+            }
         }
 
     }
