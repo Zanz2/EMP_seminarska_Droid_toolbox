@@ -30,13 +30,21 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(
                 "create table logs " +
                         "(id integer primary key, name text,info text,timestamp text)"
+
         );
+        db.execSQL(
+
+                "create table coins " +
+                        "(id integer primary key, coin_data text)"
+        );
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // TODO Auto-generated method stub
         db.execSQL("DROP TABLE IF EXISTS logs");
+        db.execSQL("DROP TABLE IF EXISTS coins");
         onCreate(db);
     }
 
@@ -81,6 +89,32 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean deleteLogs () {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from "+ LOGS_TABLE_NAME);
+        return true;
+    }
+    public boolean deleteCoinLogs () {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+ "coins");
+        return true;
+    }
+    public ArrayList<String> getAllCoinLogs() {
+        ArrayList<String> array_list = new ArrayList<String>();
+
+        //hp = new HashMap();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from coins", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            array_list.add(res.getString(res.getColumnIndex("coin_data")));
+            res.moveToNext();
+        }
+        return array_list;
+    }
+    public boolean insertCoinLog (String data) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("coin_data", data);
+        db.insert("coins", null, contentValues);
         return true;
     }
 

@@ -10,39 +10,39 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class LogDisplay extends Activity {
-
-    private Button btnClear;
-    private Button btnBack;
+public class LogCoin extends Activity {
+    private Button btnBack3;
+    private Button btnCoinClear;
     private ListView ListPrikaz;
     @Override
-    // for zanka da prebere vse iz baze pa da v listview od activity log displaya
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_display);
-        final DBHelper db = new DBHelper(this);
+        setContentView(R.layout.activity_log_coin);
         Intent intent = getIntent();
         final ArrayList podatki = intent.getStringArrayListExtra("list");
-        btnClear = (Button)findViewById(R.id.clear);
-        btnBack = (Button)findViewById(R.id.back3);
-        ListPrikaz = (ListView) findViewById(R.id.list_prikaz);
+        final DBHelper db = new DBHelper(this);
+        btnBack3 = (Button)findViewById(R.id.back3);
+        btnCoinClear = (Button)findViewById(R.id.cleardata);
+        ListPrikaz = (ListView) findViewById(R.id.coin_list);
         RefreshList(podatki);
-        btnClear.setOnClickListener(new View.OnClickListener() {
+        btnBack3.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(LogCoin.this, Tools.class);
+                //myIntent.putExtra("key", value); //za pošiljanje drugam
+                LogCoin.this.startActivity(myIntent);
+
+            }
+        });
+        btnCoinClear.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 podatki.clear();
                 RefreshList(podatki);
-                db.deleteLogs();
-            }
-        });
-        btnBack.setOnClickListener(new View.OnClickListener() {
+                db.deleteCoinLogs();
 
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(LogDisplay.this, MainActivity.class);
-                //myIntent.putExtra("key", value); //za pošiljanje drugam
-                LogDisplay.this.startActivity(myIntent);
 
             }
         });

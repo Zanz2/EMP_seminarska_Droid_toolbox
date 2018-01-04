@@ -22,6 +22,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -183,58 +184,66 @@ public class MainActivity extends Activity implements Gretje.OnProgressListener 
                 Date currentTime = Calendar.getInstance().getTime();
                 String s_currenttime = df.format(currentTime);
 
-
-                String grav_sens_name = "Gravity Sensor";
-                String grav_sens_info = " x: ";
-                grav_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV_alt)).getText());
-                grav_sens_info+= " y: ";
-                grav_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV1_alt)).getText());
-                grav_sens_info+= " z: ";
-                grav_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV2_alt)).getText());
-                db.insertLog(grav_sens_name,grav_sens_info,s_currenttime);
-
-                String accel_sens_name = "Acceleration Sensor";
-                String accel_sens_info = " x: ";
-                accel_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV3_alt)).getText());
-                accel_sens_info+= " y: ";
-                accel_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV4_alt)).getText());
-                accel_sens_info+= " z: ";
-                accel_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV5_alt)).getText());
-                db.insertLog(accel_sens_name,accel_sens_info,s_currenttime);
-
-                String rot_sens_name = "Rotation Sensor";
-                String rot_sens_info = " x: ";
-                rot_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV6_alt)).getText());
-                rot_sens_info+= " y: ";
-                rot_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV7_alt)).getText());
-                rot_sens_info+= " z: ";
-                rot_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV8_alt)).getText());
-                db.insertLog(rot_sens_name,rot_sens_info,s_currenttime);
-
-                String prox_sens_name = "Proximity Sensor";
-                String prox_sens_info = " distance (usually in cm): ";
-                prox_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV9_alt)).getText());
-                db.insertLog(prox_sens_name,prox_sens_info,s_currenttime);
-
-                String temp_sens_name = "Temperature Sensor";
-                String temp_sens_info = " value (in celsius): ";
-                temp_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV10_alt)).getText());
-                db.insertLog(temp_sens_name,temp_sens_info,s_currenttime);
-
-                String press_sens_name = "Pressure Sensor";
-                String press_sens_info = " value (in hpa): ";
-                press_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV11_alt)).getText());
-                db.insertLog(press_sens_name,press_sens_info,s_currenttime);
-
-                String light_sens_name = "Light Sensor";
-                String light_sens_info = " value (in lux SI): ";
-                light_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV12_alt)).getText());
-                db.insertLog(light_sens_name,light_sens_info,s_currenttime);
-
-                String humid_sens_name = "Humidity sensor";
-                String humid_sens_info = " value (relative): ";
-                humid_sens_info+=String.valueOf(((TextView)findViewById(R.id.TV13_alt)).getText());
-                db.insertLog(humid_sens_name,humid_sens_info,s_currenttime);
+                if(grav_sens!=null) {
+                    String grav_sens_name = "Gravity Sensor";
+                    String grav_sens_info = " x: ";
+                    grav_sens_info += String.valueOf(((TextView) findViewById(R.id.TV_alt)).getText());
+                    grav_sens_info += " y: ";
+                    grav_sens_info += String.valueOf(((TextView) findViewById(R.id.TV1_alt)).getText());
+                    grav_sens_info += " z: ";
+                    grav_sens_info += String.valueOf(((TextView) findViewById(R.id.TV2_alt)).getText());
+                    db.insertLog(grav_sens_name, grav_sens_info, s_currenttime);
+                }
+                if(lin_accel_sens!=null) {
+                    String accel_sens_name = "Acceleration Sensor";
+                    String accel_sens_info = " x: ";
+                    accel_sens_info += String.valueOf(((TextView) findViewById(R.id.TV3_alt)).getText());
+                    accel_sens_info += " y: ";
+                    accel_sens_info += String.valueOf(((TextView) findViewById(R.id.TV4_alt)).getText());
+                    accel_sens_info += " z: ";
+                    accel_sens_info += String.valueOf(((TextView) findViewById(R.id.TV5_alt)).getText());
+                    db.insertLog(accel_sens_name, accel_sens_info, s_currenttime);
+                }
+                if(rot_vect_sens!=null) {
+                    String rot_sens_name = "Rotation Sensor";
+                    String rot_sens_info = " x: ";
+                    rot_sens_info += String.valueOf(((TextView) findViewById(R.id.TV6_alt)).getText());
+                    rot_sens_info += " y: ";
+                    rot_sens_info += String.valueOf(((TextView) findViewById(R.id.TV7_alt)).getText());
+                    rot_sens_info += " z: ";
+                    rot_sens_info += String.valueOf(((TextView) findViewById(R.id.TV8_alt)).getText());
+                    db.insertLog(rot_sens_name, rot_sens_info, s_currenttime);
+                }
+                if(prox_sens!=null) {
+                    String prox_sens_name = "Proximity Sensor";
+                    String prox_sens_info = " distance (usually in cm): ";
+                    prox_sens_info += String.valueOf(((TextView) findViewById(R.id.TV9_alt)).getText());
+                    db.insertLog(prox_sens_name, prox_sens_info, s_currenttime);
+                }
+                if(temp_sens!=null) {
+                    String temp_sens_name = "Temperature Sensor";
+                    String temp_sens_info = " value (in celsius): ";
+                    temp_sens_info += String.valueOf(((TextView) findViewById(R.id.TV10_alt)).getText());
+                    db.insertLog(temp_sens_name, temp_sens_info, s_currenttime);
+                }
+                if(pressure_sens!=null) {
+                    String press_sens_name = "Pressure Sensor";
+                    String press_sens_info = " value (in hpa): ";
+                    press_sens_info += String.valueOf(((TextView) findViewById(R.id.TV11_alt)).getText());
+                    db.insertLog(press_sens_name, press_sens_info, s_currenttime);
+                }
+                if(light_sens!=null) {
+                    String light_sens_name = "Light Sensor";
+                    String light_sens_info = " value (in lux SI): ";
+                    light_sens_info += String.valueOf(((TextView) findViewById(R.id.TV12_alt)).getText());
+                    db.insertLog(light_sens_name, light_sens_info, s_currenttime);
+                }
+                if(humid_sens!=null) {
+                    String humid_sens_name = "Humidity sensor";
+                    String humid_sens_info = " value (relative): ";
+                    humid_sens_info += String.valueOf(((TextView) findViewById(R.id.TV13_alt)).getText());
+                    db.insertLog(humid_sens_name, humid_sens_info, s_currenttime);
+                }
                 String break1 = "-----";
                 db.insertLog(break1,break1,break1);
             }
@@ -259,32 +268,115 @@ public class MainActivity extends Activity implements Gretje.OnProgressListener 
         });
     }
 
+    private int stevecgrav=0;
+    private int stevecaccel=0;
+    private int stevecrot=0;
+    private int max_const=10;
+    public float value_list1g[] = new float[max_const];
+    public float value_list2g[] = new float[max_const];
+    public float value_list3g[] = new float[max_const];
     SensorEventListener gravitySensorListener = new SensorEventListener() {
+
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            ((TextView)findViewById(R.id.TV_alt)).setText(String.valueOf(sensorEvent.values[0]));
-            ((TextView)findViewById(R.id.TV1_alt)).setText(String.valueOf(sensorEvent.values[1]));
-            ((TextView)findViewById(R.id.TV2_alt)).setText(String.valueOf(sensorEvent.values[2]));
+            value_list1g[stevecgrav]=sensorEvent.values[0];
+            value_list2g[stevecgrav]=sensorEvent.values[1];
+            value_list3g[stevecgrav]=sensorEvent.values[2];
+            stevecgrav+=1;
+            if(stevecgrav>=max_const){
+                print();
+            }
+        }
+        public void print(){
+            float rezx=0;
+            float rezy=0;
+            float rezz=0;
+            for(int i=0;i<value_list1g.length;i++){
+                rezx=rezx+value_list1g[i];
+            }
+            for(int i=0;i<value_list2g.length;i++){
+                rezy=rezy+value_list2g[i];
+            }
+            for(int i=0;i<value_list3g.length;i++){
+                rezz=rezz+value_list3g[i];
+            }
+            rezx=rezx/value_list1g.length;
+            rezy=rezy/value_list2g.length;
+            rezz=rezz/value_list3g.length;
+            ((TextView)findViewById(R.id.TV_alt)).setText(String.valueOf(rezx));
+            ((TextView)findViewById(R.id.TV1_alt)).setText(String.valueOf(rezy));
+            ((TextView)findViewById(R.id.TV2_alt)).setText(String.valueOf(rezz));
+            stevecgrav=0;
+
+            value_list1g = new float[max_const];
+            value_list2g = new float[max_const];
+            value_list3g = new float[max_const];
+            Arrays.fill(value_list1g, 0);
+            Arrays.fill(value_list2g, 0);
+            Arrays.fill(value_list3g, 0);
+
         }
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int i) {
         }
     };
+    public float value_list1a[] = new float[max_const];
+    public float value_list2a[] = new float[max_const];
+    public float value_list3a[] = new float[max_const];
     SensorEventListener accelerationSensorListener = new SensorEventListener() {
+
+
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
 
-            ((TextView)findViewById(R.id.TV3_alt)).setText(String.valueOf(sensorEvent.values[0]));
-            ((TextView)findViewById(R.id.TV4_alt)).setText(String.valueOf(sensorEvent.values[1]));
-            ((TextView)findViewById(R.id.TV5_alt)).setText(String.valueOf(sensorEvent.values[2]));
+            value_list1a[stevecaccel]=sensorEvent.values[0];
+            value_list2a[stevecaccel]=sensorEvent.values[1];
+            value_list3a[stevecaccel]=sensorEvent.values[2];
+            stevecaccel+=1;
+            if(stevecaccel>=max_const){
+                print();
+            }
         }
 
+        public void print(){
+            float rezx=0;
+            float rezy=0;
+            float rezz=0;
+            for(int i=0;i<value_list1a.length;i++){
+                rezx=rezx+value_list1a[i];
+            }
+            for(int i=0;i<value_list2a.length;i++){
+                rezy=rezy+value_list2a[i];
+            }
+            for(int i=0;i<value_list3a.length;i++){
+                rezz=rezz+value_list3a[i];
+            }
+            rezx=rezx/value_list1a.length;
+            rezy=rezy/value_list2a.length;
+            rezz=rezz/value_list3a.length;
+            ((TextView)findViewById(R.id.TV3_alt)).setText(String.valueOf(rezx));
+            ((TextView)findViewById(R.id.TV4_alt)).setText(String.valueOf(rezy));
+            ((TextView)findViewById(R.id.TV5_alt)).setText(String.valueOf(rezz));
+            stevecaccel=0;
+
+            value_list1a = new float[max_const];
+            value_list2a = new float[max_const];
+            value_list3a = new float[max_const];
+            Arrays.fill(value_list1a, 0);
+            Arrays.fill(value_list2a, 0);
+            Arrays.fill(value_list3a, 0);
+        }
         @Override
         public void onAccuracyChanged(Sensor sensor, int i) {
         }
     };
+    public float value_list1r[] = new float[max_const];
+    public float value_list2r[] = new float[max_const];
+    public float value_list3r[] = new float[max_const];
     SensorEventListener rotationSensorListener = new SensorEventListener() {
+
+
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
             float[] rotationMatrix = new float[16];
@@ -299,9 +391,44 @@ public class MainActivity extends Activity implements Gretje.OnProgressListener 
             for(int i = 0; i < 3; i++) {
                 orientations[i] = (float)(Math.toDegrees(orientations[i]));
             }
-            ((TextView)findViewById(R.id.TV6_alt)).setText(String.valueOf(orientations[0]));
-            ((TextView)findViewById(R.id.TV7_alt)).setText(String.valueOf(orientations[1]));
-            ((TextView)findViewById(R.id.TV8_alt)).setText(String.valueOf(orientations[2]));
+            value_list1r[stevecrot]=orientations[0];
+            value_list2r[stevecrot]=orientations[1];
+            value_list3r[stevecrot]=orientations[2];
+
+            stevecrot+=1;
+            if(stevecrot>=max_const){
+                print();
+            }
+
+        }
+        public void print(){
+            float rezx=0;
+            float rezy=0;
+            float rezz=0;
+            for(int i=0;i<value_list1r.length;i++){
+                rezx=rezx+value_list1r[i];
+            }
+            for(int i=0;i<value_list2r.length;i++){
+                rezy=rezy+value_list2r[i];
+            }
+            for(int i=0;i<value_list3r.length;i++){
+                rezz=rezz+value_list3r[i];
+            }
+            rezx=rezx/value_list1r.length;
+            rezy=rezy/value_list2r.length;
+            rezz=rezz/value_list3r.length;
+            ((TextView)findViewById(R.id.TV6_alt)).setText(String.valueOf(rezx));
+            ((TextView)findViewById(R.id.TV7_alt)).setText(String.valueOf(rezy));
+            ((TextView)findViewById(R.id.TV8_alt)).setText(String.valueOf(rezz));
+            stevecrot=0;
+
+
+            value_list1r = new float[max_const];
+            value_list2r = new float[max_const];
+            value_list3r = new float[max_const];
+            Arrays.fill(value_list1r, 0);
+            Arrays.fill(value_list2r, 0);
+            Arrays.fill(value_list3r, 0);
         }
 
         @Override
@@ -366,9 +493,9 @@ public class MainActivity extends Activity implements Gretje.OnProgressListener 
     @Override
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(gravitySensorListener, grav_sens, 200000);
-        mSensorManager.registerListener(accelerationSensorListener, lin_accel_sens, 200000);
-        mSensorManager.registerListener(rotationSensorListener, rot_vect_sens, 200000);
+        mSensorManager.registerListener(gravitySensorListener, grav_sens, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(accelerationSensorListener, lin_accel_sens, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(rotationSensorListener, rot_vect_sens, SensorManager.SENSOR_DELAY_NORMAL);
         mSensorManager.registerListener(proximitySensorListener, prox_sens, SensorManager.SENSOR_DELAY_UI);
         mSensorManager.registerListener(temperatureSensorListener, temp_sens, SensorManager.SENSOR_DELAY_UI);
         mSensorManager.registerListener(pressureSensorListener, pressure_sens, SensorManager.SENSOR_DELAY_UI);

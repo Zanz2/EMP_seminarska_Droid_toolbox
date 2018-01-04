@@ -33,6 +33,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Tools extends Activity {
@@ -45,8 +49,10 @@ public class Tools extends Activity {
     private TriggerEventListener mTriggerEventListener;
     private String HashValue;
     private Button btnBack2;
-
-    Button btnGetdata;
+    private Button btnUpdate;
+    private String CoinDb;
+    final DBHelper db = new DBHelper(this);
+    Button btnCoinLog;
     RequestQueue requestQueue;
 
 
@@ -57,7 +63,7 @@ public class Tools extends Activity {
         setContentView(R.layout.activity_tools);
 
 
-        btnGetdata = (Button) findViewById(R.id.get_data);
+        btnCoinLog = (Button) findViewById(R.id.coin_log);
         requestQueue = Volley.newRequestQueue(this);
 
         mSensorManager = (SensorManager)this.getSystemService(Context.SENSOR_SERVICE);
@@ -67,6 +73,16 @@ public class Tools extends Activity {
         rot_vect_sens = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
         prox_sens = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         btnBack2 = (Button)findViewById(R.id.back2);
+        btnUpdate=(Button)findViewById(R.id.update);
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                new GetCoinPrice().execute();
+
+            }
+        });
         btnBack2.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -77,15 +93,18 @@ public class Tools extends Activity {
 
             }
         });
-        btnGetdata.setOnClickListener(new View.OnClickListener() {
+        btnCoinLog.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                new GetCoinPrice().execute();
+                Intent myIntent = new Intent(Tools.this, LogCoin.class);
+                myIntent.putExtra("list", db.getAllCoinLogs()); //za pošiljanje drugam
+                Tools.this.startActivity(myIntent);
 
 
             }
         });
+
     }
 
 
@@ -211,6 +230,11 @@ public class Tools extends Activity {
         protected void onPostExecute(String temp) {
             ((TextView) findViewById(R.id.btc)).setText(String.valueOf(bitcoin));
             ((TextView) findViewById(R.id.eth)).setText(String.valueOf(ethereum));
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date currentTime = Calendar.getInstance().getTime();
+            String s_currenttime = df.format(currentTime);
+            CoinDb = "BTC: "+this.bitcoin+"\n"+"ETH: "+this.ethereum+"\n"+" TIME: "+s_currenttime;
+            db.insertCoinLog(CoinDb);
         }
         private boolean getJSON(int i){
             try {
